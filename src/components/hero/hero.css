@@ -1,0 +1,122 @@
+/* ================= RESPONSIVE FIXES ================= */
+
+/* Tablets */
+@media (max-width: 1024px) {
+
+  .navbar {
+    padding: 20px 30px;
+  }
+
+  .nav-links {
+    gap: 20px;
+  }
+
+  .content {
+    padding: 0 30px;
+  }
+
+  .headline {
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    max-width: 100%;
+  }
+
+  .tagline {
+    font-size: 1rem;
+  }
+
+  .meta {
+    gap: 18px;
+  }
+
+  .buttons {
+    flex-wrap: wrap;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    padding: 12px 24px;
+    font-size: 0.75rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px 20px;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 10px;
+  }
+
+  .content {
+    padding: 0 20px;
+    align-items: flex-start;
+  }
+
+  .headline {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+
+  .tagline {
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+  }
+
+  .meta {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .meta-item {
+    font-size: 0.8rem;
+  }
+
+  .subtitle {
+    font-size: 0.75rem;
+  }
+
+  .buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Reduce heavy effects for performance */
+  .blob {
+    filter: blur(60px);
+    opacity: 0.5;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+
+  .headline {
+    font-size: 1.6rem;
+  }
+
+  .badge {
+    font-size: 0.65rem;
+    padding: 5px 12px;
+  }
+
+  .nav-links a {
+    font-size: 0.75rem;
+  }
+
+  .logo {
+    font-size: 1rem;
+  }
+}

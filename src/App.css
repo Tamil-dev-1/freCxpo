@@ -1,0 +1,131 @@
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: #0b0b0b;
+  color: #fff;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 100px 0;
+}
+
+.hero h1 {
+  font-size: 48px;
+  color: #c6ff00;
+}
+
+.hero h2 {
+  font-size: 28px;
+  margin: 10px 0;
+}
+
+.hero-info {
+  margin: 15px 0;
+  opacity: 0.8;
+}
+
+.hero-desc {
+  margin-bottom: 20px;
+}
+
+/* BUTTONS */
+.btn {
+  padding: 12px 25px;
+  border: none;
+  cursor: pointer;
+  margin: 10px;
+  border-radius: 6px;
+}
+
+.primary {
+  background: #c6ff00;
+  color: #000;
+}
+
+.secondary {
+  background: transparent;
+  border: 1px solid #c6ff00;
+  color: #c6ff00;
+}
+
+.large {
+  font-size: 18px;
+}
+
+/* SECTIONS */
+.section {
+  padding: 80px 0;
+}
+
+.dark {
+  background: #111;
+}
+
+/* GRID */
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+/* CARD */
+.card {
+  background: #1a1a1a;
+  padding: 25px;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border: 1px solid #c6ff00;
+}
+
+/* SCHEDULE */
+.schedule {
+  display: flex;
+  gap: 50px;
+}
+
+/* CTA */
+.cta-section {
+  text-align: center;
+  padding: 80px 0;
+  background: #0b0b0b;
+}
+
+/* FOOTER */
+.footer {
+  text-align: center;
+  padding: 20px;
+  background: #000;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .grid-3, .grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .schedule {
+    flex-direction: column;
+  }
+
+  .hero h1 {
+    font-size: 32px;
+  }
+}
