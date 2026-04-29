@@ -48,9 +48,7 @@ function mod(n, m) {
 }
 
 export default function About() {
-
-
-  const [active, setActive] = useState(1); // 0-based index of center card
+  const [active, setActive] = useState(1);
   const [animDir, setAnimDir] = useState(null);
   const intervalRef = useRef(null);
 
@@ -70,7 +68,6 @@ export default function About() {
     intervalRef.current = setInterval(() => go(1), 4000);
   };
 
-  // positions: left=prev, center=active, right=next
   const getPos = (idx) => {
     if (idx === active) return "center";
     if (idx === mod(active - 1, TOTAL)) return "left";
@@ -81,27 +78,15 @@ export default function About() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
 
         .about-section {
-          background: radial-gradient(ellipse at 70% 20%, #2a003a 0%, #0d0014 50%, #000008 100%);
+          background: #ffffff;
           min-height: 100vh;
           padding: 80px 0 60px;
-          font-family: 'Rajdhani', sans-serif;
+          font-family: 'Inter', sans-serif;
           overflow: hidden;
           position: relative;
-        }
-
-        /* Grid lines */
-        .about-section::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background-image:
-            linear-gradient(rgba(255,61,176,0.04) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,61,176,0.04) 1px, transparent 1px);
-          background-size: 60px 60px;
-          pointer-events: none;
         }
 
         /* ---- TOP ROW ---- */
@@ -114,10 +99,10 @@ export default function About() {
           flex-wrap: wrap;
         }
         .about-heading {
-          font-family: 'Orbitron', monospace;
+          font-family: 'Inter', monospace;
           font-weight: 900;
           font-size: clamp(2rem, 4.5vw, 3.8rem);
-          color: #fff;
+          color: #000;
           line-height: 1.1;
           max-width: 480px;
           text-shadow: 0 0 50px rgba(255,61,176,0.25);
@@ -136,7 +121,7 @@ export default function About() {
           gap: 20px;
         }
         .about-desc {
-          color: rgba(255,255,255,0.6);
+          color: #353333;
           font-size: 1rem;
           line-height: 1.7;
           font-weight: 500;
@@ -158,7 +143,7 @@ export default function About() {
           outline: none;
           color: rgba(255,255,255,0.7);
           padding: 11px 16px;
-          font-family: 'Rajdhani', sans-serif;
+          font-family: 'Inter', sans-serif;
           font-size: 0.9rem;
           letter-spacing: 0.5px;
         }
@@ -168,7 +153,7 @@ export default function About() {
           border: none;
           color: #fff;
           padding: 11px 22px;
-          font-family: 'Orbitron', monospace;
+          font-family: 'Inter', monospace;
           font-size: 0.7rem;
           font-weight: 700;
           letter-spacing: 1.5px;
@@ -183,9 +168,9 @@ export default function About() {
           margin-bottom: 28px;
         }
         .carousel-label h3 {
-          font-family: 'Orbitron', monospace;
+          font-family: 'Inter', monospace;
           font-size: clamp(1.4rem, 2.5vw, 2rem);
-          color: rgba(255,255,255,0.15);
+          color: rgba(0,0,0,0.15);
           font-weight: 900;
           letter-spacing: 2px;
         }
@@ -263,7 +248,7 @@ export default function About() {
           letter-spacing: 2.5px;
           text-transform: uppercase;
           margin-bottom: 6px;
-          font-family: 'Orbitron', monospace;
+          font-family: 'Inter', monospace;
         }
         .card-title {
           font-size: 1.15rem;
@@ -271,7 +256,7 @@ export default function About() {
           color: #fff;
           line-height: 1.25;
           margin-bottom: 4px;
-          font-family: 'Orbitron', monospace;
+          font-family: 'Inter', monospace;
         }
         .card-price {
           font-size: 0.75rem;
@@ -294,7 +279,7 @@ export default function About() {
           opacity: 0;
           transform: translateY(6px);
           transition: all 0.3s;
-          font-family: 'Orbitron', monospace;
+          font-family: 'Inter', monospace;
         }
         .card-wrap.center .card-read {
           opacity: 1;
@@ -302,12 +287,11 @@ export default function About() {
         }
         .card-read::after { content: ' →'; }
 
-        /* big bg text */
         .card-bg-text {
           position: absolute;
           bottom: 8px;
           left: 14px;
-          font-family: 'Orbitron', monospace;
+          font-family: 'Inter', monospace;
           font-weight: 900;
           font-size: 2.8rem;
           color: rgba(255,255,255,0.07);
@@ -328,12 +312,12 @@ export default function About() {
           display: flex;
           align-items: center;
           gap: 12px;
-          font-family: 'Orbitron', monospace;
+          font-family: 'Inter', monospace;
           font-size: 0.75rem;
-          color: rgba(255,255,255,0.4);
+          color: rgba(0,0,0,0.4);
           letter-spacing: 1px;
         }
-        .pagination .cur { color: #ff80d0; font-weight: 700; }
+        .pagination .cur { color: #ff3db0; font-weight: 700; }
         .pag-dots {
           display: flex;
           gap: 8px;
@@ -341,7 +325,7 @@ export default function About() {
         .pag-dot {
           width: 6px; height: 6px;
           border-radius: 50%;
-          background: rgba(255,255,255,0.2);
+          background: rgba(0,0,0,0.2);
           transition: all 0.3s;
           cursor: pointer;
         }
@@ -382,7 +366,7 @@ export default function About() {
           margin-top: 52px;
           padding: 0 6vw;
           font-size: clamp(0.85rem, 1.5vw, 1.05rem);
-          color: rgba(255,255,255,0.45);
+          color: rgba(0,0,0,0.45);
           letter-spacing: 0.5px;
           line-height: 1.7;
         }
@@ -416,10 +400,6 @@ export default function About() {
               students, startups, industry leaders, and innovators to
               collaborate, present, and grow.
             </p>
-            <div className="search-bar">
-              <input type="text" placeholder="Search focus areas, sessions, etc." />
-              <button className="search-btn">⊕ Explore</button>
-            </div>
           </div>
         </div>
 

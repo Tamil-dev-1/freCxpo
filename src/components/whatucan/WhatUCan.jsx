@@ -1,471 +1,452 @@
-import { useState, useRef, useEffect } from "react";
+import { SiHiveBlockchain } from "react-icons/si";
+import { VscCommentDiscussionSparkle } from "react-icons/vsc";
+import { SiCompilerexplorer } from "react-icons/si";
 
-const CARDS = [
+import { BsFillLightningChargeFill } from "react-icons/bs";
+import { MdBatteryChargingFull } from "react-icons/md";
+
+
+import { useState } from "react";
+
+const cards = [
   {
-    id: 1,
-    emoji: "🎓",
-    tag: "ACADEMIC",
-    title: "Paper Presentation",
-    subtitle: "Present your research to industry experts",
-    accent: "#4ade80",
-    accentDim: "rgba(74,222,128,0.12)",
-    border: "rgba(74,222,128,0.3)",
-    domains: [
-      { icon: "⛓️", label: "Blockchain & Web3" },
-      { icon: "🌱", label: "Renewable Energy" },
-      { icon: "🔋", label: "EV & Charging Systems" },
+    step: "01",
+    icon: <SiHiveBlockchain />,
+    title: "Paper\nPresentation",
+    subtitle: "Present Research",
+    gradient: ["#a855f7", "#ec4899", "#f43f5e"],
+    accentFrom: "#a855f7",
+    accentTo: "#f43f5e",
+    triangleFrom: "#c026d3",
+    triangleTo: "#f43f5e",
+    items: [
+      { icon: "⛓️", text: "Blockchain & Web3" },
+      { icon: <BsFillLightningChargeFill />, text: "Renewable Energy" },
+      { icon: <MdBatteryChargingFull />, text: "EV & Charging Systems" },
     ],
-    cta: "Submit Paper →",
-    bg: "linear-gradient(160deg,#071a0e 0%,#0d2b15 60%,#040e08 100%)",
+    label: "DOMAINS",
   },
   {
-    id: 2,
-    emoji: "🚀",
-    tag: "STARTUP",
-    title: "Startup Pitch",
-    subtitle: "Present your idea on a global stage",
-    accent: "#ff3db0",
-    accentDim: "rgba(255,61,176,0.12)",
-    border: "rgba(255,61,176,0.3)",
-    domains: [
-      { icon: "💡", label: "Present Startup Idea" },
-      { icon: "👁️", label: "Get Investor Visibility" },
-      { icon: "🏦", label: "Funding & Incubation" },
+    step: "02",
+    icon: <SiCompilerexplorer />,
+    title: "Startup\nPitch",
+    subtitle: "Present Startup Idea",
+    gradient: ["#f97316", "#eab308", "#facc15"],
+    accentFrom: "#f97316",
+    accentTo: "#eab308",
+    triangleFrom: "#f97316",
+    triangleTo: "#facc15",
+    items: [
+      { icon: "👁️", text: "Get Investor Visibility" },
+      { icon: "💡", text: "Explore Funding" },
+      { icon: "🏗️", text: "Incubation Support" },
     ],
-    cta: "Pitch Now →",
-    bg: "linear-gradient(160deg,#2a0018 0%,#4a0030 60%,#150010 100%)",
+    label: "BENEFITS",
   },
   {
-    id: 3,
-    emoji: "🎤",
-    tag: "PANELS",
-    title: "Panel Discussions",
-    subtitle: "Engage with thought leaders & innovators",
-    accent: "#c084fc",
-    accentDim: "rgba(192,132,252,0.12)",
-    border: "rgba(192,132,252,0.3)",
-    domains: [
-      { icon: "⚡", label: "Future of Energy" },
-      { icon: "🚗", label: "EV Ecosystem Growth" },
-      { icon: "🌐", label: "Web3 Innovation" },
-      { icon: "♻️", label: "Sustainable Business" },
+    step: "03",
+    icon: <VscCommentDiscussionSparkle />,
+    title: "Panel\nDiscussions",
+    subtitle: "Expert-Led Sessions",
+    gradient: ["#3b82f6", "#6366f1", "#8b5cf6"],
+    accentFrom: "#3b82f6",
+    accentTo: "#8b5cf6",
+    triangleFrom: "#3b82f6",
+    triangleTo: "#7c3aed",
+    items: [
+      { icon: "⚡", text: "Future of Energy" },
+      { icon: "🚗", text: "EV Ecosystem Growth" },
+      { icon: "🌐", text: "Web3 Innovation" },
+      { icon: "🌱", text: "Sustainable Business" },
     ],
-    cta: "Join Panel →",
-    bg: "linear-gradient(160deg,#1a0a2e 0%,#2d1550 60%,#0d0518 100%)",
+    label: "TOPICS",
   },
 ];
 
-export default function WhatUCan() {
-  const [active, setActive] = useState(0);
+export default function WhatYouCanDo() {
   const [hovered, setHovered] = useState(null);
-  const timerRef = useRef(null);
-
-  const go = (dir) => {
-    clearInterval(timerRef.current);
-    setActive((p) => (p + dir + CARDS.length) % CARDS.length);
-    timerRef.current = setInterval(() => setActive((p) => (p + 1) % CARDS.length), 4500);
-  };
-
-  useEffect(() => {
-    timerRef.current = setInterval(() => setActive((p) => (p + 1) % CARDS.length), 4500);
-    return () => clearInterval(timerRef.current);
-  }, []);
-
-  // Which cards are visible: active-1, active, active+1 (3 at a time on desktop)
-  const visible = CARDS.map((_, i) => {
-    const rel = ((i - active) + CARDS.length) % CARDS.length;
-    // rel: 0=center, 1=right, 2=left (hidden or peek)
-    if (rel === 0) return "center";
-    if (rel === 1) return "right";
-    if (rel === CARDS.length - 1) return "left";
-    return "hidden";
-  });
 
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&family=Bebas+Neue&display=swap');
 
         .wycd-section {
-          background: radial-gradient(ellipse at 70% 20%, #2a003a 0%, #0d0014 50%, #000008 100%);
-          min-height: 100vh;
-          padding: 80px 0 60px;
-          font-family: 'Rajdhani', sans-serif;
-          overflow: hidden;
+          background: #f0f2f7;
+          padding: 80px 16px 100px;
           position: relative;
+          overflow: hidden;
+          font-family: 'DM Sans', sans-serif;
         }
+
         .wycd-section::before {
           content: '';
-          position: absolute; inset: 0;
-          background-image:
-            linear-gradient(rgba(255,61,176,0.035) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,61,176,0.035) 1px, transparent 1px);
-          background-size: 60px 60px;
-          pointer-events: none;
+          position: absolute;
+          inset: 0;
+          background:
+            radial-gradient(ellipse 60% 40% at 15% 80%, rgba(168,85,247,0.07) 0%, transparent 70%),
+            radial-gradient(ellipse 50% 50% at 85% 20%, rgba(59,130,246,0.07) 0%, transparent 70%);
         }
 
-        /* TOP HEADER */
-        .wycd-header {
+        .wycd-eyebrow {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 11px;
+          font-weight: 500;
+          letter-spacing: 0.35em;
+          text-transform: uppercase;
+          color: #94a3b8;
+          text-align: center;
+          margin-bottom: 10px;
+        }
+
+        .wycd-heading {
+          font-family: 'Cormorant Garamond', serif;
+          font-size: clamp(36px, 5vw, 58px);
+          font-weight: 700;
+          text-align: center;
+          color: #0f172a;
+          line-height: 1.1;
+          margin-bottom: 16px;
+          letter-spacing: -0.01em;
+        }
+
+        .wycd-heading em {
+          font-style: italic;
+          background: linear-gradient(90deg, #a855f7, #3b82f6);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+
+        .wycd-desc {
+          text-align: center;
+          color: #64748b;
+          font-size: 15px;
+          font-weight: 300;
+          max-width: 480px;
+          margin: 0 auto 64px;
+          line-height: 1.7;
+        }
+
+        /* Progress dots row (like screenshot) */
+        .wycd-progress {
           display: flex;
-          justify-content: space-between;
-          align-items: flex-start;
-          padding: 0 6vw 52px;
-          gap: 40px;
+          align-items: center;
+          justify-content: center;
+          gap: 0;
+          margin-bottom: 40px;
+        }
+        .prog-dot {
+          width: 12px; height: 12px;
+          border-radius: 50%;
+          flex-shrink: 0;
+        }
+        .prog-line {
+          flex: 1;
+          max-width: 160px;
+          height: 2px;
+          border-radius: 2px;
+        }
+
+        /* Cards row */
+        .wycd-cards {
+          display: flex;
+          gap: 24px;
+          justify-content: center;
+          align-items: stretch;
           flex-wrap: wrap;
         }
-        .wycd-heading {
-          font-family: 'Orbitron', monospace;
-          font-weight: 900;
-          font-size: clamp(1.8rem, 4vw, 3.4rem);
-          color: #fff;
-          line-height: 1.12;
-          max-width: 480px;
-          text-shadow: 0 0 60px rgba(255,61,176,0.2);
-        }
-        .wycd-heading span {
-          background: linear-gradient(135deg, #ff3db0, #c084fc);
-          -webkit-background-clip: text;
-          background-clip: text;
-          color: transparent;
-        }
-        .wycd-right {
-          max-width: 380px;
-          display: flex;
-          flex-direction: column;
-          gap: 16px;
-          padding-top: 8px;
-        }
-        .wycd-subtext {
-          color: rgba(255,255,255,0.55);
-          font-size: 0.98rem;
-          line-height: 1.7;
-          font-weight: 500;
-        }
-        .wycd-subtext strong { color: #ff80d0; }
 
-        /* CARDS ROW */
-        .wycd-stage {
-          position: relative;
-          padding: 0 6vw;
-          display: flex;
-          align-items: stretch;
-          gap: 24px;
-        }
-
-        /* CARD */
+        /* Individual card — matches screenshot proportions (tall, portrait) */
         .wycd-card {
-          border-radius: 12px;
-          overflow: hidden;
           position: relative;
-          border: 1px solid rgba(255,255,255,0.08);
-          transition: all 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+          width: 300px;
+          min-height: 460px;
+          border-radius: 24px;
+          background: #fff;
+          box-shadow:
+            0 2px 8px rgba(0,0,0,0.06),
+            0 12px 48px rgba(0,0,0,0.10),
+            0 0 0 1px rgba(255,255,255,0.9) inset;
+          overflow: hidden;
           cursor: pointer;
-          flex-shrink: 0;
+          transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.4s ease;
           display: flex;
           flex-direction: column;
         }
 
-        /* Desktop: 3 cards visible, center bigger */
-        @media (min-width: 900px) {
-          .wycd-card.pos-center {
-            width: calc(38% - 16px);
-            transform: scale(1);
-            opacity: 1;
-            z-index: 10;
-            border-color: rgba(255,61,176,0.3);
-            box-shadow: 0 24px 80px rgba(255,61,176,0.25), 0 0 0 1px rgba(255,61,176,0.2);
-          }
-          .wycd-card.pos-left,
-          .wycd-card.pos-right {
-            width: calc(31% - 16px);
-            transform: scale(0.97);
-            opacity: 0.75;
-            z-index: 5;
-            filter: brightness(0.65) saturate(0.7);
-          }
-          .wycd-card.pos-hidden {
-            width: 0;
-            opacity: 0;
-            overflow: hidden;
-            border: none;
-            padding: 0;
-          }
+        .wycd-card:hover {
+          transform: translateY(-12px) scale(1.02);
+          box-shadow:
+            0 4px 16px rgba(0,0,0,0.08),
+            0 24px 72px rgba(0,0,0,0.18),
+            0 0 0 1px rgba(255,255,255,0.9) inset;
         }
 
-        /* Mobile: full width stack */
-        @media (max-width: 899px) {
-          .wycd-stage { flex-direction: column; gap: 20px; }
-          .wycd-card { width: 100% !important; opacity: 1 !important; filter: none !important; transform: scale(1) !important; }
-          .wycd-card.pos-hidden { display: none; }
+        /* Diagonal gradient triangle — top-right, like screenshot */
+        .card-triangle {
+          position: absolute;
+          top: 0; right: 0;
+          width: 180px; height: 180px;
+          clip-path: polygon(100% 0, 0 0, 100% 100%);
+          z-index: 1;
+          transition: opacity 0.3s ease;
         }
 
-        .card-inner {
-          padding: 36px 32px 32px;
+        /* Icon circle */
+        .card-icon-wrap {
+          position: absolute;
+          top: 24px;
+          right: 24px;
+          z-index: 2;
+          width: 52px; height: 52px;
+          border-radius: 50%;
+          background: rgba(255,255,255,0.25);
+          border: 2px solid rgba(255,255,255,0.5);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 22px;
+          backdrop-filter: blur(4px);
+          box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+
+        /* Bottom-left small triangle (like screenshot) */
+        .card-tri-sm {
+          position: absolute;
+          bottom: 0; left: 0;
+          width: 80px; height: 80px;
+          clip-path: polygon(0 100%, 0 0, 100% 100%);
+          z-index: 1;
+          opacity: 0.15;
+        }
+
+        /* Card content */
+        .card-body {
+          position: relative;
+          z-index: 3;
+          padding: 44px 28px 32px;
           flex: 1;
           display: flex;
           flex-direction: column;
-          background: rgba(10,0,20,0.6);
-          backdrop-filter: blur(12px);
-          position: relative;
-          z-index: 2;
-        }
-
-        /* Gradient top bar */
-        .card-topbar {
-          height: 3px;
-          width: 100%;
-          border-radius: 2px;
-          margin-bottom: 28px;
-          transition: width 0.3s;
-        }
-
-        .card-tag {
-          font-family: 'Orbitron', monospace;
-          font-size: 0.62rem;
-          font-weight: 700;
-          letter-spacing: 3px;
-          text-transform: uppercase;
-          margin-bottom: 14px;
-        }
-
-        .card-emoji {
-          font-size: 2.6rem;
-          line-height: 1;
-          margin-bottom: 14px;
-          display: block;
-          filter: drop-shadow(0 0 16px currentColor);
         }
 
         .card-title {
-          font-family: 'Orbitron', monospace;
-          font-weight: 900;
-          font-size: 1.25rem;
-          color: #fff;
-          line-height: 1.2;
-          margin-bottom: 8px;
+          font-family: 'Cormorant Garamond', serif;
+          font-size: 30px;
+          font-weight: 700;
+          color: #0f172a;
+          line-height: 1.1;
+          white-space: pre-line;
+          margin-bottom: 6px;
+          margin-top: 80px;
         }
 
         .card-subtitle {
-          font-size: 0.85rem;
-          color: rgba(255,255,255,0.45);
+          font-size: 12px;
           font-weight: 500;
-          margin-bottom: 24px;
-          line-height: 1.5;
+          letter-spacing: 0.15em;
+          text-transform: uppercase;
+          color: #94a3b8;
+          margin-bottom: 20px;
         }
 
-        /* Domain chips */
-        .card-domains {
+        /* Three dots like screenshot */
+        .card-dots {
           display: flex;
-          flex-direction: column;
-          gap: 8px;
-          margin-bottom: 28px;
+          gap: 5px;
+          margin-bottom: 16px;
+        }
+        .card-dot {
+          width: 6px; height: 6px;
+          border-radius: 50%;
+          opacity: 0.4;
+        }
+
+        .card-label {
+          font-size: 10px;
+          font-weight: 600;
+          letter-spacing: 0.3em;
+          text-transform: uppercase;
+          margin-bottom: 12px;
+          opacity: 0.5;
+        }
+
+        .card-items {
+          list-style: none;
+          padding: 0;
+          margin: 0;
           flex: 1;
         }
-        .domain-chip {
+
+        .card-items li {
           display: flex;
           align-items: center;
           gap: 10px;
-          padding: 9px 14px;
-          border-radius: 6px;
-          font-size: 0.82rem;
-          font-weight: 600;
-          letter-spacing: 0.5px;
-          color: rgba(255,255,255,0.8);
-          border: 1px solid rgba(255,255,255,0.07);
-          background: rgba(255,255,255,0.04);
-          transition: all 0.2s;
+          font-size: 13.5px;
+          font-weight: 400;
+          color: #475569;
+          padding: 7px 0;
+          border-bottom: 1px solid rgba(0,0,0,0.05);
+          line-height: 1.4;
         }
-        .wycd-card:hover .domain-chip {
-          background: rgba(255,255,255,0.07);
-        }
-        .chip-icon { font-size: 1rem; }
 
-        /* CTA */
-        .card-cta {
-          display: inline-block;
-          font-family: 'Orbitron', monospace;
-          font-size: 0.72rem;
-          font-weight: 700;
-          letter-spacing: 1.5px;
-          text-transform: uppercase;
-          padding: 11px 22px;
-          border-radius: 4px;
-          border: none;
-          cursor: pointer;
-          transition: all 0.25s;
+        .card-items li:last-child {
+          border-bottom: none;
+        }
+
+        .item-icon {
+          font-size: 15px;
+          flex-shrink: 0;
+          width: 24px;
           text-align: center;
-          width: 100%;
         }
 
-        /* BOTTOM ROW */
-        .wycd-footer {
+        /* Step label at bottom */
+        .card-step {
+          margin-top: 24px;
+          padding-top: 16px;
+          border-top: 1px solid rgba(0,0,0,0.07);
           display: flex;
           align-items: center;
-          justify-content: space-between;
-          padding: 32px 6vw 0;
-          flex-wrap: wrap;
-          gap: 20px;
-        }
-        .wycd-dots {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-        }
-        .wycd-dot {
-          width: 8px; height: 8px;
-          border-radius: 50%;
-          background: rgba(255,255,255,0.18);
-          cursor: pointer;
-          transition: all 0.3s;
-          border: none;
-        }
-        .wycd-dot.active {
-          background: #ff3db0;
-          box-shadow: 0 0 10px #ff3db0;
-          width: 26px;
-          border-radius: 4px;
-        }
-        .wycd-nav {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-        }
-        .wycd-nav-btn {
-          width: 46px; height: 46px;
-          border-radius: 50%;
-          border: 1.5px solid rgba(255,61,176,0.4);
-          background: rgba(255,61,176,0.08);
-          color: #ff80d0;
-          font-size: 1.15rem;
-          cursor: pointer;
-          display: flex; align-items: center; justify-content: center;
-          transition: all 0.25s;
-          font-family: 'Orbitron', monospace;
-        }
-        .wycd-nav-btn:hover {
-          background: rgba(255,61,176,0.25);
-          border-color: #ff3db0;
-          color: #fff;
-          box-shadow: 0 0 20px rgba(255,61,176,0.3);
-          transform: scale(1.08);
-        }
-        .wycd-nav-btn.active-arrow {
-          background: linear-gradient(135deg, #ff3db0, #c000ff);
-          border-color: transparent;
-          color: #fff;
-          box-shadow: 0 0 24px rgba(255,61,176,0.5);
+          gap: 10px;
         }
 
-        .wycd-counter {
-          font-family: 'Orbitron', monospace;
-          font-size: 0.72rem;
-          color: rgba(255,255,255,0.3);
-          letter-spacing: 2px;
+        .step-line {
+          height: 2px;
+          width: 32px;
+          border-radius: 2px;
         }
-        .wycd-counter span { color: #ff80d0; }
+
+        .step-text {
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: 13px;
+          letter-spacing: 0.25em;
+          color: #94a3b8;
+        }
+
+        @media (max-width: 768px) {
+          .wycd-card { width: 100%; max-width: 340px; }
+          .wycd-cards { gap: 20px; }
+          .wycd-section { padding: 60px 16px 80px; }
+        }
       `}</style>
 
       <section className="wycd-section">
-        {/* HEADER */}
-        <div className="wycd-header">
-          <h2 className="wycd-heading">
-            What You Can <span>Do Here</span>
-          </h2>
-          <div className="wycd-right">
-            <p className="wycd-subtext">
-              Discover the most impactful ways to engage at{" "}
-              <strong>FreCxPo 2026</strong> — from presenting research to
-              pitching your startup to the world's innovators and investors.
-            </p>
-          </div>
-        </div>
+        <div className="container-fluid">
 
-        {/* CARDS */}
-        <div className="wycd-stage">
-          {CARDS.map((card, idx) => {
-            const pos = visible[idx];
-            return (
-              <div
-                key={card.id}
-                className={`wycd-card pos-${pos}`}
-                style={{ background: card.bg }}
-                onClick={() => {
-                  if (pos === "left") go(-1);
-                  else if (pos === "right") go(1);
-                }}
-                onMouseEnter={() => setHovered(idx)}
-                onMouseLeave={() => setHovered(null)}
-              >
+          {/* Header */}
+          <p className="wycd-eyebrow">FreCxPo 2026 · TGPS Global</p>
+          <h2 className="wycd-heading">What You Can <em>Do</em></h2>
+          <p className="wycd-desc">
+            Three powerful ways to engage, present, and grow at India's most anticipated proprietary expo.
+          </p>
+
+          {/* Progress dots row — like screenshot */}
+          <div className="wycd-progress">
+            {cards.map((c, i) => (
+              <div key={i} style={{ display: "flex", alignItems: "center" }}>
                 <div
-                  className="card-topbar"
-                  style={{ background: `linear-gradient(90deg, ${card.accent}, transparent)` }}
+                  className="prog-dot"
+                  style={{ background: `linear-gradient(135deg, ${c.accentFrom}, ${c.accentTo})` }}
                 />
-                <div className="card-inner">
-                  <div className="card-tag" style={{ color: card.accent }}>
-                    {card.tag}
-                  </div>
-                  <span className="card-emoji">{card.emoji}</span>
-                  <div className="card-title">{card.title}</div>
-                  <div className="card-subtitle">{card.subtitle}</div>
-                  <div className="card-domains">
-                    {card.domains.map((d) => (
-                      <div
-                        key={d.label}
-                        className="domain-chip"
-                        style={{
-                          borderColor: hovered === idx ? card.border : "rgba(255,255,255,0.07)",
-                          background: hovered === idx ? card.accentDim : "rgba(255,255,255,0.04)",
-                        }}
-                      >
-                        <span className="chip-icon">{d.icon}</span>
-                        <span>{d.label}</span>
-                      </div>
-                    ))}
-                  </div>
-                  <button
-                    className="card-cta"
+                {i < cards.length - 1 && (
+                  <div
+                    className="prog-line"
                     style={{
-                      background: pos === "center"
-                        ? `linear-gradient(135deg, ${card.accent}99, ${card.accent}44)`
-                        : "rgba(255,255,255,0.05)",
-                      color: card.accent,
-                      border: `1.5px solid ${card.border}`,
+                      background: `linear-gradient(90deg, ${c.accentTo}, ${cards[i+1].accentFrom})`,
+                      opacity: 0.35,
+                      width: "clamp(60px, 10vw, 160px)",
                     }}
-                  >
-                    {card.cta}
-                  </button>
-                </div>
+                  />
+                )}
               </div>
-            );
-          })}
-        </div>
-
-        {/* FOOTER */}
-        <div className="wycd-footer">
-          <div className="wycd-dots">
-            {CARDS.map((_, i) => (
-              <button
-                key={i}
-                className={`wycd-dot ${i === active ? "active" : ""}`}
-                onClick={() => {
-                  clearInterval(timerRef.current);
-                  setActive(i);
-                  timerRef.current = setInterval(() => setActive((p) => (p + 1) % CARDS.length), 4500);
-                }}
-              />
             ))}
           </div>
 
-          <div className="wycd-counter">
-            <span>{String(active + 1).padStart(2, "0")}</span>
-            {" / "}
-            {String(CARDS.length).padStart(2, "0")}
+          {/* Cards */}
+          <div className="wycd-cards">
+            {cards.map((card, i) => (
+              <div
+                key={i}
+                className="wycd-card"
+                onMouseEnter={() => setHovered(i)}
+                onMouseLeave={() => setHovered(null)}
+                style={{
+                  animationDelay: `${i * 0.15}s`,
+                }}
+              >
+                {/* Diagonal gradient triangle top-right */}
+                <div
+                  className="card-triangle"
+                  style={{
+                    background: `linear-gradient(135deg, ${card.triangleFrom}, ${card.triangleTo})`,
+                  }}
+                />
+
+                {/* Small triangle bottom-left */}
+                <div
+                  className="card-tri-sm"
+                  style={{
+                    background: `linear-gradient(135deg, ${card.triangleFrom}, ${card.triangleTo})`,
+                  }}
+                />
+
+                {/* Icon circle */}
+                <div
+                  className="card-icon-wrap"
+                  style={{
+                    background: `linear-gradient(135deg, ${card.accentFrom}99, ${card.accentTo}99)`, color:"#fff",
+                  }}
+                >
+                  {card.icon}
+                </div>
+
+                {/* Body */}
+                <div className="card-body">
+                  <h3 className="card-title">{card.title}</h3>
+                  <p className="card-subtitle">{card.subtitle}</p>
+
+                  {/* Dots decoration */}
+                  <div className="card-dots">
+                    {[0.5, 0.7, 1].map((op, di) => (
+                      <div
+                        key={di}
+                        className="card-dot"
+                        style={{
+                          background: card.accentFrom,
+                          opacity: op * 0.6,
+                        }}
+                      />
+                    ))}
+                  </div>
+
+                  <p className="card-label" style={{ color: card.accentFrom }}>{card.label}</p>
+
+                  <ul className="card-items">
+                    {card.items.map((item, j) => (
+                      <li key={j}>
+                        <span className="item-icon">{item.icon}</span>
+                        <span>{item.text}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* Step footer */}
+                  <div className="card-step">
+                    <div
+                      className="step-line"
+                      style={{
+                        background: `linear-gradient(90deg, ${card.accentFrom}, ${card.accentTo})`,
+                      }}
+                    />
+                    <span className="step-text">STEP {card.step}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
 
-          <div className="wycd-nav">
-            <button className="wycd-nav-btn" onClick={() => go(-1)}>‹</button>
-            <button className="wycd-nav-btn active-arrow" onClick={() => go(1)}>›</button>
-          </div>
         </div>
       </section>
     </>
